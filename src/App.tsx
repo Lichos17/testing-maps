@@ -1,9 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
+
+type Address = {
+  street: string;
+  city: string;
+  state: string;
+  location: {
+    lang: number;
+    lng: number;
+  };
+};
+
+type Contact = {
+  site: string;
+  email: string;
+  phone: string;
+};
+
+type Restaurants = {
+  id: string;
+  rating: number;
+  name: string;
+  contact: Contact;
+  address: Address;
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [restaurants, setRestaurants] = useState<Restaurants | null>(null);
+
+  useEffect(() => {
+    const getRestaurantsInformation = async () => {
+      try {
+        const apiResp = await fetch(
+          "https://recruiting-datasets.s3.us-east-2.amazonaws.com/data_melp.json",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(apiResp);
+        // const restaurantsInfo = await apiResp.json();
+
+        // setRestaurants(restaurantsInfo);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRestaurantsInformation();
+  }, []);
+
+  useEffect(() => {
+    console.log(restaurants);
+  }, [restaurants]);
 
   return (
     <div className="App">
@@ -28,7 +80,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
