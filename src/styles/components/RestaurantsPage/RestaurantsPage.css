@@ -2,7 +2,9 @@
   display: grid;
   gap: 20px;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  grid-template-rows: 20rem;
+  grid-auto-rows: 20rem;
   width: calc(50% - 2rem);
 }
 
@@ -17,6 +19,18 @@
   height: 40rem;
   margin-right: 2rem;
   border-radius: 20px;
+}
+
+.map--loading,
+.map--failed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+}
+
+.map--failed {
+  border: 1px solid red;
 }
 
 @media screen and (max-width: 1140px) {

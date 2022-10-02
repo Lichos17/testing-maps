@@ -28,7 +28,12 @@
   align-items: center;
   color: #939393;
   margin: 0.5rem 0;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+.info__text {
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .info--first {
