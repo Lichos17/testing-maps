@@ -2,5 +2,36 @@
   display: grid;
   gap: 20px;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  width: calc(50% - 2rem);
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.map {
+  width: calc(40% - 2rem);
+  flex-grow: 1;
+  height: 40rem;
+  margin-right: 2rem;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 1140px) {
+  .restaurants {
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    margin-top: 2rem;
+  }
+
+  .main {
+    padding: 0 2rem;
+  }
+
+  .map {
+    width: 100%;
+    margin: 0;
+  }
 }

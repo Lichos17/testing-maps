@@ -38,6 +38,6 @@ ul {
 a,
 a:link,
 a:hover {
-  color: #fff;
   text-decoration: none;
+  font-weight: 600;
 }

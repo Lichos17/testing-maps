@@ -13,13 +13,18 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@googlemaps/react-wrapper": "^1.1.35",
+    "@googlemaps/typescript-guards": "^2.0.3",
     "@szhsin/react-menu": "^3.2.0",
     "eslint": "^8.24.0",
+    "fast-equals": "^4.0.3",
+    "google-map-react": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1"
   },
   "devDependencies": {
+    "@types/google-map-react": "^2.1.7",
+    "@types/googlemaps": "^3.43.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
