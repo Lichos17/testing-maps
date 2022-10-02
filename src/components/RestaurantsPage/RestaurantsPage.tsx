@@ -1,44 +1,52 @@
-import { useMemo, useState } from 'react'
+import { useContext } from 'react'
 import { Wrapper } from '@googlemaps/react-wrapper'
 
 import { RestaurantCard } from './RestaurantCard'
-import { Filter } from '../common'
-import { Map, Marker, render } from './Map'
-import { restaurants } from '../../api'
+import { Filter } from './Filter'
+import { Map, Marker } from './Map'
+
+import { IRestaurantsContext, RestaurantsContext } from '../../contexts'
 
 import '../../styles/components/RestaurantsPage/RestaurantsPage.css'
+import { Render } from './LoadingMap'
 
 export const RestaurantsPage = () => {
-  const [zoom, setZoom] = useState(3) // initial zoom
-  const [center, setCenter] = useState<google.maps.LatLngLiteral>({
-    lat: 0,
-    lng: 0,
-  })
-
-  const restaurant = useMemo(() => restaurants, [])
-
-  const [marker, setMarker] = useState<google.maps.LatLng | null>(null)
+  const { restaurants, zoom, setZoom, center, setCenter, marker, setMarker } =
+    useContext<IRestaurantsContext>(RestaurantsContext)
 
   const onClick = (e: google.maps.MapMouseEvent) => {
     // avoid directly mutating state
-    setMarker(e.latLng!)
+    setMarker(e.latLng ? e.latLng : marker)
   }
 
   const onIdle = (m: google.maps.Map) => {
-    setZoom(m.getZoom()!)
-    setCenter(m.getCenter()!.toJSON())
+    setZoom(m.getZoom() ? m.getZoom() : zoom)
+
+    setCenter(m.getCenter() ? m.getCenter().toJSON() : center)
   }
 
   return (
     <div className='container main'>
       <Filter />
-      <Wrapper apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} render={render}>
+      <Wrapper apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY} render={Render}>
         <Map className='map' center={center} onClick={onClick} onIdle={onIdle} zoom={zoom}>
-          {marker && <Marker position={marker} />}{' '}
+          {marker && <Marker position={marker} />}
+          {window.google &&
+            restaurants.map((restaurant) => (
+              <Marker
+                key={restaurant.id}
+                position={
+                  new window.google.maps.LatLng(
+                    restaurant.address.location.lat,
+                    restaurant.address.location.lng,
+                  )
+                }
+              />
+            ))}
         </Map>
       </Wrapper>
       <div className='restaurants'>
-        {restaurant.map((restaurant) => (
+        {restaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.id} restaurant={restaurant} />
         ))}
       </div>

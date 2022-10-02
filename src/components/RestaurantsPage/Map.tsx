@@ -1,5 +1,14 @@
 // [START maps_react_map]
-import { ReactNode, FC, useRef, useState, useEffect, Children, isValidElement } from 'react'
+import {
+  ReactNode,
+  FC,
+  useRef,
+  useState,
+  useEffect,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react'
 import { Status } from '@googlemaps/react-wrapper'
 
 import { useDeepCompareEffectForMaps } from '../../hooks'
@@ -91,12 +100,5 @@ export const Marker: FC<google.maps.MarkerOptions> = (options) => {
 
   return null
 }
-
-export const render = (status: Status) => {
-  return <h1>{status}</h1>
-}
-
-// [END maps_react_map]
-let PRESERVE_COMMENT_ABOVE // force tsc to maintain the comment above eslint-disable-line
 
 export {}
