@@ -17,7 +17,7 @@
 .map {
   width: calc(40% - 2rem);
   flex-grow: 1;
-  height: 40rem;
+  height: 41rem;
   margin-right: 2rem;
   border-radius: 20px;
 
