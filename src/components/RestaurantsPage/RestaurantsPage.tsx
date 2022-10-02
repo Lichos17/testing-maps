@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Wrapper } from '@googlemaps/react-wrapper'
+import ReactPaginate from 'react-paginate'
 
 import { RestaurantCard } from './RestaurantCard'
 import { Filter } from './Filter'
@@ -7,12 +8,15 @@ import { Map, Marker } from './Map'
 import { Render } from './LoadingMap'
 
 import { IRestaurantsContext, RestaurantsContext } from '../../contexts'
+import { usePagination } from '../../hooks'
 
 import '../../styles/components/RestaurantsPage/RestaurantsPage.css'
 
 export const RestaurantsPage = () => {
   const { restaurants, zoom, setZoom, center, setCenter, marker, setMarker } =
     useContext<IRestaurantsContext>(RestaurantsContext)
+
+  const { currentItems, handlePageClick, pageCount } = usePagination(restaurants)
 
   const onClick = (e: google.maps.MapMouseEvent) => {
     // avoid directly mutating state
@@ -46,10 +50,30 @@ export const RestaurantsPage = () => {
         </Map>
       </Wrapper>
       <div className='restaurants'>
-        {restaurants.map((restaurant) => (
+        {currentItems.map((restaurant) => (
           <RestaurantCard key={restaurant.id} restaurant={restaurant} />
         ))}
       </div>
+      <ReactPaginate
+        nextLabel='next >'
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel='< previous'
+        pageClassName='page-item'
+        pageLinkClassName='page-link'
+        previousClassName='page-item'
+        previousLinkClassName='page-link'
+        nextClassName='page-item'
+        nextLinkClassName='page-link'
+        breakLabel='...'
+        breakClassName='page-item'
+        breakLinkClassName='page-link'
+        containerClassName='pagination'
+        activeClassName='active'
+        renderOnZeroPageCount={() => null}
+      />
     </div>
   )
 }
