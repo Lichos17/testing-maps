@@ -6,14 +6,17 @@ import { IRestaurantsContext, RestaurantsContext } from '../../contexts'
 
 import { restaurants as restaurantsData } from '../../api'
 
-import { useSortAndFilterRestaurants } from '../../hooks'
+import { useGetRestaurantsStats, useSortAndFilterRestaurants } from '../../hooks'
 
 import '../../styles/components/RestaurantsPage/Filter.css'
 
 export const Filter = () => {
-  const { setRestaurants, marker } = useContext<IRestaurantsContext>(RestaurantsContext)
+  const { restaurants, setRestaurants, marker } =
+    useContext<IRestaurantsContext>(RestaurantsContext)
   const [sortBy, setSortBy] = useState<'rating' | 'alpha'>('rating')
   const [radius, setRadius] = useState(5000)
+  const [averageRating, standarDevRestaurants] = useGetRestaurantsStats(restaurants)
+
   useSortAndFilterRestaurants(setRestaurants, restaurantsData, marker, radius, sortBy)
 
   return (
@@ -51,20 +54,20 @@ export const Filter = () => {
         <div className='stat'>
           <p className='stat__title'>Average Rating</p>
           <div className='stat__content'>
-            <p className='stat__text'>4.5</p>
+            <p className='stat__text'>{averageRating.toFixed(2)}</p>
             <FontAwesomeIcon className='stat__icon' icon={faStar} />
           </div>
         </div>
         <div className='stat'>
           <p className='stat__title'>Total Restaurants</p>
           <div className='stat__content'>
-            <p className='stat__text'>4.5</p>
+            <p className='stat__text'>{restaurants.length}</p>
           </div>
         </div>
         <div className='stat'>
           <p className='stat__title'>Ratings SD</p>
           <div className='stat__content'>
-            <p className='stat__text'>4.5</p>
+            <p className='stat__text'>{standarDevRestaurants.toFixed(2)}</p>
           </div>
         </div>
       </div>

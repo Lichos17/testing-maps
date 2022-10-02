@@ -1,4 +1,3 @@
-// [START maps_react_map]
 import {
   ReactNode,
   FC,
@@ -9,7 +8,6 @@ import {
   isValidElement,
   cloneElement,
 } from 'react'
-import { Status } from '@googlemaps/react-wrapper'
 
 import { useDeepCompareEffectForMaps } from '../../hooks'
 
@@ -22,7 +20,6 @@ interface MapProps extends google.maps.MapOptions {
 }
 
 export const Map: FC<MapProps> = ({ onClick, onIdle, className, children, style, ...options }) => {
-  // [START maps_react_map_component_add_map_hooks]
   const ref = useRef<HTMLDivElement>(null)
   const [map, setMap] = useState<google.maps.Map>()
 
@@ -31,19 +28,13 @@ export const Map: FC<MapProps> = ({ onClick, onIdle, className, children, style,
       setMap(new window.google.maps.Map(ref.current, {}))
     }
   }, [ref, map])
-  // [END maps_react_map_component_add_map_hooks]
 
-  // [START maps_react_map_component_options_hook]
-  // because React does not do deep comparisons, a custom hook is used
-  // see discussion in https://github.com/googlemaps/js-samples/issues/946
   useDeepCompareEffectForMaps(() => {
     if (map) {
       map.setOptions(options)
     }
   }, [map, options])
-  // [END maps_react_map_component_options_hook]
 
-  // [START maps_react_map_component_event_hooks]
   useEffect(() => {
     if (map) {
       ;['click', 'idle'].forEach((eventName) => google.maps.event.clearListeners(map, eventName))
@@ -57,9 +48,7 @@ export const Map: FC<MapProps> = ({ onClick, onIdle, className, children, style,
       }
     }
   }, [map, onClick, onIdle])
-  // [END maps_react_map_component_event_hooks]
 
-  // [START maps_react_map_component_return]
   return (
     <>
       <div ref={ref} style={style} className={className} />
@@ -72,10 +61,8 @@ export const Map: FC<MapProps> = ({ onClick, onIdle, className, children, style,
       })}
     </>
   )
-  // [END maps_react_map_component_return]
 }
 
-// [START maps_react_map_marker_component]
 export const Marker: FC<google.maps.MarkerOptions> = (options) => {
   const [marker, setMarker] = useState<google.maps.Marker>()
 

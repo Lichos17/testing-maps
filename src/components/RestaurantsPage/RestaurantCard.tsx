@@ -23,9 +23,6 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
         <h3 className='card__title'>{restaurant.name}</h3>
         <div>
           <Menu menuButton={<FontAwesomeIcon className='menu' icon={faEllipsisVertical} />}>
-            <MenuItem>
-              <FontAwesomeIcon className='menu__icon' icon={faShare} /> Share on facebook
-            </MenuItem>
             <MenuItem
               onClick={() =>
                 window.open(
@@ -33,6 +30,9 @@ export const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
                 )
               }
             >
+              <FontAwesomeIcon className='menu__icon' icon={faShare} /> Share on facebook
+            </MenuItem>
+            <MenuItem disabled>
               <FontAwesomeIcon className='menu__icon' icon={faThumbsUp} /> Share on facebook
             </MenuItem>
           </Menu>
