@@ -4,11 +4,11 @@ import { Wrapper } from '@googlemaps/react-wrapper'
 import { RestaurantCard } from './RestaurantCard'
 import { Filter } from './Filter'
 import { Map, Marker } from './Map'
+import { Render } from './LoadingMap'
 
 import { IRestaurantsContext, RestaurantsContext } from '../../contexts'
 
 import '../../styles/components/RestaurantsPage/RestaurantsPage.css'
-import { Render } from './LoadingMap'
 
 export const RestaurantsPage = () => {
   const { restaurants, zoom, setZoom, center, setCenter, marker, setMarker } =

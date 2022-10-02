@@ -1,5 +1,4 @@
 import { Status } from '@googlemaps/react-wrapper'
-import React from 'react'
 
 export const Render = (status: Status) => {
   if (status === Status.LOADING) return <div className='map map--loading'>Loading</div>

@@ -4,7 +4,7 @@ import { restaurants as restaurantsResp } from '../api'
 
 import { Restaurant } from '../interfaces'
 
-export interface IRestaurantsContext {
+export type IRestaurantsContext = {
   restaurants: Restaurant[]
   setRestaurants: React.Dispatch<React.SetStateAction<Restaurant[]>>
   allRestaurants: Restaurant[]
@@ -18,22 +18,14 @@ export interface IRestaurantsContext {
 
 export const RestaurantsContext = createContext<IRestaurantsContext>({
   restaurants: restaurantsResp,
-  setRestaurants: () => {
-    console.log('restaurants init')
-  },
+  setRestaurants: () => {},
   allRestaurants: restaurantsResp,
   zoom: 3,
-  setZoom: () => {
-    console.log('zoom init')
-  },
+  setZoom: () => {},
   center: { lat: 0, lng: 0 },
-  setCenter: () => {
-    console.log('center init')
-  },
+  setCenter: () => {},
   marker: null,
-  setMarker: () => {
-    console.log('marker init')
-  },
+  setMarker: () => {},
 })
 
 export const RestaurantContextProvider = (props: { children: ReactNode }) => {
@@ -56,7 +48,6 @@ export const RestaurantContextProvider = (props: { children: ReactNode }) => {
         setZoom,
         center,
         setCenter,
-
         marker,
         setMarker,
       }}

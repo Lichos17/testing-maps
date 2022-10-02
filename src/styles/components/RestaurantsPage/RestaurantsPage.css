@@ -1,3 +1,9 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+}
+
 .restaurants {
   display: grid;
   gap: 20px;
@@ -5,12 +11,7 @@
   grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
   grid-template-rows: 20rem;
   grid-auto-rows: 20rem;
-  width: calc(50% - 2rem);
-}
-
-.main {
-  display: flex;
-  flex-wrap: wrap;
+  width: calc(55% - 2rem);
 }
 
 .map {
@@ -19,6 +20,8 @@
   height: 40rem;
   margin-right: 2rem;
   border-radius: 20px;
+
+  transition: all 0.4s ease;
 }
 
 .map--loading,
