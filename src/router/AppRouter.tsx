@@ -1,15 +1,19 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { RestaurantsPage } from '../components'
+import { Navbar, RestaurantsPage } from '../components'
 
 export const AppRouter = () => {
   return (
-    <Routes>
-      {/* Login y Registro */}
-      <Route path='/stats' element={<div>hola</div>} />
+    <>
+      {' '}
+      <Navbar />
+      <Routes>
+        {/* Login y Registro */}
+        <Route path='/stats' element={<div>hola</div>} />
 
-      {/* JournalApp */}
-      <Route path='/*' element={<RestaurantsPage />} />
-    </Routes>
+        {/* JournalApp */}
+        <Route path='/*' element={<RestaurantsPage />} />
+      </Routes>
+    </>
   )
 }
