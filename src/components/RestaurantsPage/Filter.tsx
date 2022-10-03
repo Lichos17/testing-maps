@@ -15,9 +15,10 @@ export const Filter = () => {
     useContext<IRestaurantsContext>(RestaurantsContext)
   const [sortBy, setSortBy] = useState<'rating' | 'alpha'>('rating')
   const [radius, setRadius] = useState(5000)
+  const [rating, setRating] = useState(0)
   const [averageRating, standarDevRestaurants] = useGetRestaurantsStats(restaurants)
 
-  useSortAndFilterRestaurants(setRestaurants, restaurantsData, marker, radius, sortBy)
+  useSortAndFilterRestaurants(setRestaurants, restaurantsData, marker, radius, sortBy, rating)
 
   return (
     <div className='filtersbar'>
@@ -47,6 +48,19 @@ export const Filter = () => {
             className='filter__input'
             type='number'
             min={1}
+          />
+        </div>
+        <div className='filter'>
+          <label htmlFor='rating' className='filter__title'>
+            Rating:
+          </label>
+          <input
+            onChange={(e) => setRating(Number(e.target.value))}
+            value={Number(rating).toString()}
+            id='rating'
+            className='filter__input'
+            type='number'
+            min={0}
           />
         </div>
       </div>
